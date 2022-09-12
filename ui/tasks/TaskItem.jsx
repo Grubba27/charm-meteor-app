@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Box, Button, HStack, Stack, Checkbox } from '@chakra-ui/react';
 
-export const TaskItem = memo(({ task, onMarkAsDone, onDelete }) => (
+export const TaskItem = memo(({ task, onMarkAsDone, onDelete, onEdit }) => (
   <HStack mt={4}>
     <Box w="80%">
       <Checkbox
@@ -20,6 +20,16 @@ export const TaskItem = memo(({ task, onMarkAsDone, onDelete }) => (
         onClick={() => onDelete(task._id)}
       >
         Remove
+      </Button>
+    </Stack>
+    <Stack w="20%" justify="flex-end" direction="row">
+      <Button
+        colorScheme="yello"
+        variant="outline"
+        size="xs"
+        onClick={() => onEdit(task._id)}
+      >
+        Edit
       </Button>
     </Stack>
   </HStack>

@@ -63,7 +63,7 @@ export const Footer = () => (
         </a>
         ) by{' '}
         <a href="https://twitter.com/fredmaiaarantes" target="_blank">
-          @fredmaiaarantes
+          @me
         </a>
         .
       </Text>

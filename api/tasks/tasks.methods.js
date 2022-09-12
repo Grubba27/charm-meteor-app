@@ -20,15 +20,16 @@ const insertTask = ({ description }) => {
 
 /**
  * Insert a task for the logged user.
- * @param {{ description: String }}
+ * @param {{ newDescripiton: String , taskId: String}}
  * @throws Will throw an error if user is not logged in.
  */
-const updateTask = ({ description }) => {
-  check(description, String);
+const updateTask = ({ newDescripiton, taskId }) => {
+  check(newDescripiton, String);
   checkLoggedIn();
-  TasksCollection.update({
-    description,
-  });
+  TasksCollection.update(
+    { _id: taskId },
+    { $set: { description: newDescripiton } }
+  );
 };
 
 /**

@@ -61,6 +61,7 @@ export const TaskItems = ({
             task={task}
             onMarkAsDone={taskId => Meteor.call('toggleTaskDone', { taskId })}
             onDelete={taskId => Meteor.call('removeTask', { taskId })}
+            onEdit={taskId => Meteor.call('updateTask', { taskId, newDescripiton: 'Edited' })}
           />
         ))}
       </>
