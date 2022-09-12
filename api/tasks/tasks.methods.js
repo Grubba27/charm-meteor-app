@@ -19,6 +19,19 @@ const insertTask = ({ description }) => {
 };
 
 /**
+ * Insert a task for the logged user.
+ * @param {{ description: String }}
+ * @throws Will throw an error if user is not logged in.
+ */
+const updateTask = ({ description }) => {
+  check(description, String);
+  checkLoggedIn();
+  TasksCollection.update({
+    description,
+  });
+};
+
+/**
  * Check if user is logged in and is the task owner.
  * @param {{ taskId: String }}
  * @throws Will throw an error if user is not logged in or is not the task owner.
@@ -61,6 +74,7 @@ const toggleTaskDone = ({ taskId }) => {
  */
 Meteor.methods({
   insertTask,
+  updateTask,
   removeTask,
   toggleTaskDone,
 });
