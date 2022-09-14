@@ -10,15 +10,15 @@ import {
 import { TaskItem } from './TaskItem';
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import {Tasks} from '../../common/tasks/tasks';
+import { Tasks } from '../../common/tasks/tasks';
 
 export const TaskItems = ({
-  tasks,
-  pendingCount,
-  hideDone,
-  setHideDone,
-  isLoading,
-}) => (
+                            tasks,
+                            pendingCount,
+                            hideDone,
+                            setHideDone,
+                            isLoading,
+                          }) => (
   <Box
     mt={8}
     py={{ base: 2 }}
@@ -53,7 +53,7 @@ export const TaskItems = ({
       </Stack>
     </HStack>
     {isLoading() ? (
-      <Spinner />
+      <Spinner/>
     ) : (
       <>
         {tasks.map(task => (
@@ -62,7 +62,10 @@ export const TaskItems = ({
             task={task}
             onMarkAsDone={taskId => Tasks.toggleDone({ taskId })}
             onDelete={taskId => Tasks.remove({ taskId })}
-            onEdit={taskId => Tasks.update({ taskId, newDescripiton: 'Edited' })}
+            onEdit={taskId => Tasks.update({
+              taskId,
+              newDescripiton: 'Edited'
+            })}
           />
         ))}
       </>

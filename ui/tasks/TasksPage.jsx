@@ -5,11 +5,12 @@ import { useTracker, useFind, useSubscribe } from 'meteor/react-meteor-data';
 import { TasksHeader } from './TasksHeader';
 import { TaskItems } from './TaskItems';
 import { TasksCollection } from '../../api/tasks/tasks.collection';
+import { Tasks } from '../../common/tasks/tasks';
 
 /* eslint-disable import/no-default-export */
 export default function TasksPage() {
   const [hideDone, setHideDone] = useState(false);
-  const isLoading = useSubscribe('tasksByLoggedUser');
+  const isLoading = useSubscribe(Tasks.byUser.config.name);
   const userId = useTracker(() => Meteor.userId());
   const filter = hideDone ? { done: { $ne: true }, userId } : { userId };
   const tasks = useFind(

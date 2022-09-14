@@ -72,13 +72,25 @@ const toggleTaskDone = ({ taskId }) => {
   TasksCollection.update({ _id: taskId }, { $set: { done: !task.done } });
 };
 
+function publishTasks() {
+  return TasksCollection.find({ userId: this.userId });
+}
 
 const Tasks = createRouter('tasks')
   .addMethod('insert', z.object({ description: z.string() }), insertTask)
   .addMethod('update', z.object({ newDescripiton: z.string(), taskId: z.string() }), updateTask)
   .addMethod('remove', z.object({ taskId: z.string() }), removeTask)
   .addMethod('toggleDone', z.object({ taskId: z.string() }), toggleTaskDone)
+  .addPublication('byUser', z.any(), publishTasks)
   .build();
+
+// Tasks schema is like this: {
+//   "insert": ({description: string}) => void;
+//   "update": ({newDescripiton: string, taskId: string)} => void;
+//   "remove": ({taskId: string}) => void;
+//   "toggleDone": ({taskId: string}) => void;
+//   "byUser": () => Mongo.Cursor;
+// }
 
 
 export { Tasks };
