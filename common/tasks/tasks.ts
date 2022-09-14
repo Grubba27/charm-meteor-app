@@ -1,9 +1,9 @@
-import { createRouter } from 'meteor/rpc';
 import { z } from 'zod';
 import { check } from 'meteor/check';
 import { checkLoggedIn } from '../../api/common/auth';
 import { TasksCollection } from '../../api/tasks/tasks.collection';
 import { Meteor } from 'meteor/meteor';
+import { createRouter } from './lib/createRouter';
 
 
 /**

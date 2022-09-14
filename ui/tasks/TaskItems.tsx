@@ -9,8 +9,8 @@ import {
 } from '@chakra-ui/react';
 import { TaskItem } from './TaskItem';
 import React from 'react';
-import { Meteor } from 'meteor/meteor';
 import { Tasks } from '../../common/tasks/tasks';
+
 
 export const TaskItems = ({
                             tasks,
@@ -62,10 +62,7 @@ export const TaskItems = ({
             task={task}
             onMarkAsDone={taskId => Tasks.toggleDone({ taskId })}
             onDelete={taskId => Tasks.remove({ taskId })}
-            onEdit={taskId => Tasks.update({
-              taskId,
-              newDescripiton: 'Edited'
-            })}
+            onEdit={taskId => Tasks.update({ taskId, newDescripiton: 'new description' })}
           />
         ))}
       </>
