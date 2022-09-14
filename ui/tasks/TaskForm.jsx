@@ -12,25 +12,30 @@ import {
 import { object, string } from 'yup';
 import { useFormik } from 'formik';
 import { ErrorStatus } from '../common/ErrorStatus';
+import { Tasks } from '../../common/tasks/tasks';
 
 export const TaskForm = () => {
   const validationSchema = object({
-    description: string('Enter task description').required(
-      'Task description is required'
-    ),
+    description: string('Enter task description')
+      .required(
+        'Task description is required'
+      ),
   });
 
   const onSubmit = (values, actions) => {
     const description = values.description.trim();
-    Meteor.call('insertTask', { description }, err => {
-      if (err) {
+    console.log(Tasks);
+    Tasks.insert({ description })
+      .then(() => {
+        actions.resetForm();
+      })
+      .catch((err) => {
         const errorMessage = err?.reason || 'Sorry, please try again.';
         actions.setStatus(errorMessage);
-      } else {
-        actions.resetForm();
-      }
-      actions.setSubmitting(false);
-    });
+      })
+      .finally(() => {
+        actions.setSubmitting(false);
+      });
   };
 
   const formik = useFormik({
@@ -42,7 +47,7 @@ export const TaskForm = () => {
 
   return (
     <Box>
-      <ErrorStatus status={formik.status} />
+      <ErrorStatus status={formik.status}/>
       <form onSubmit={formik.handleSubmit}>
         <InputGroup size="md">
           <FormControl

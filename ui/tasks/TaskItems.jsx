@@ -10,6 +10,7 @@ import {
 import { TaskItem } from './TaskItem';
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
+import {Tasks} from '../../common/tasks/tasks';
 
 export const TaskItems = ({
   tasks,
@@ -59,9 +60,9 @@ export const TaskItems = ({
           <TaskItem
             key={task._id}
             task={task}
-            onMarkAsDone={taskId => Meteor.call('toggleTaskDone', { taskId })}
-            onDelete={taskId => Meteor.call('removeTask', { taskId })}
-            onEdit={taskId => Meteor.call('updateTask', { taskId, newDescripiton: 'Edited' })}
+            onMarkAsDone={taskId => Tasks.toggleDone({ taskId })}
+            onDelete={taskId => Tasks.remove({ taskId })}
+            onEdit={taskId => Tasks.update({ taskId, newDescripiton: 'Edited' })}
           />
         ))}
       </>
